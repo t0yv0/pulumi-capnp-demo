@@ -9,44 +9,66 @@ import (
 	"zombiezen.com/go/capnproto2/rpc"
 )
 
+type callback struct {
+	whenDone func(data []byte) error
+}
+
+func (cb callback) Done(p PromiseCallback_done) error {
+	data, err := p.Params.Data()
+	if err != nil {
+		return err
+	}
+	return cb.whenDone(data)
+}
+
+var _ PromiseCallback_Server = callback{}
+
+func then(p Promise, whenDone func(data []byte) error) Promise_then_Results_Promise {
+	return p.Then(context.TODO(), func(p Promise_then_Params) error {
+		return p.SetCallback(PromiseCallback_ServerToClient(callback{whenDone}))
+	})
+}
+
+func resolve(p Promise, data []byte) Promise_resolve_Results_Promise {
+	return p.Resolve(context.TODO(), func(p Promise_resolve_Params) error {
+		return p.SetData(data)
+	})
+
+}
+
 func runTestClient(ctx context.Context, c net.Conn) error {
-	// Create a connection that we can use to get the HashFactory.
+	// Create a connection that we can use to get the PromiseBroker.
 	conn := rpc.NewConn(rpc.StreamTransport(c))
 	defer conn.Close()
+	defer c.Close()
+
 	// Get the "bootstrap" interface.  This is the capability set with
 	// rpc.MainInterface on the remote side.
-	hf := HashFactory{Client: conn.Bootstrap(ctx)}
+	pb := PromiseBroker{Client: conn.Bootstrap(ctx)}
 
-	// Now we can call methods on hf, and they will be sent over c.
-	s := hf.NewSha1(ctx, func(p HashFactory_newSha1_Params) error {
+	// Now we can call methods on pb, and they will be sent over c.
+	p1 := pb.NewPromise(ctx, func(p PromiseBroker_newPromise_Params) error { return nil }).Promise()
+
+	ch := make(chan int)
+
+	then(p1, func(data []byte) error {
+		fmt.Printf("CB1: Received: %s\n", string(data))
 		return nil
-	}).Hash()
+	})
 
-	// s refers to a remote Hash.  Method calls are delivered in order.
-	s.Write(ctx, func(p Hash_write_Params) error {
-		err := p.SetData([]byte("Hello, "))
-		return err
-	})
-	s.Write(ctx, func(p Hash_write_Params) error {
-		err := p.SetData([]byte("World!"))
-		return err
-	})
-	// Get the sum, waiting for the result.
-	result, err := s.Sum(ctx, func(p Hash_sum_Params) error {
+	then(p1, func(data []byte) error {
+		fmt.Printf("CB2: Received: %s\n", string(data))
+
+		ch <- 1
 		return nil
-	}).Struct()
-	if err != nil {
-		return err
-	}
+	})
 
-	// Display the result.
-	sha1Val, err := result.Hash()
-	if err != nil {
-		return err
-	}
-	fmt.Printf("sha1: %x\n", sha1Val)
+	resolve(p1, []byte("OK then.."))
 
-	return c.Close()
+	fmt.Printf("Waiting on the promise to be resolved\n")
+	<-ch
+
+	return nil
 }
 
 func clientMain() {

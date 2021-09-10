@@ -10,56 +10,56 @@ import (
 	server "zombiezen.com/go/capnproto2/server"
 )
 
-type HashFactory struct{ Client capnp.Client }
+type PromiseBroker struct{ Client capnp.Client }
 
-// HashFactory_TypeID is the unique identifier for the type HashFactory.
-const HashFactory_TypeID = 0xe17a62d19f60961b
+// PromiseBroker_TypeID is the unique identifier for the type PromiseBroker.
+const PromiseBroker_TypeID = 0xa1a44809e3de3511
 
-func (c HashFactory) NewSha1(ctx context.Context, params func(HashFactory_newSha1_Params) error, opts ...capnp.CallOption) HashFactory_newSha1_Results_Promise {
+func (c PromiseBroker) NewPromise(ctx context.Context, params func(PromiseBroker_newPromise_Params) error, opts ...capnp.CallOption) PromiseBroker_newPromise_Results_Promise {
 	if c.Client == nil {
-		return HashFactory_newSha1_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+		return PromiseBroker_newPromise_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
 	}
 	call := &capnp.Call{
 		Ctx: ctx,
 		Method: capnp.Method{
-			InterfaceID:   0xe17a62d19f60961b,
+			InterfaceID:   0xa1a44809e3de3511,
 			MethodID:      0,
-			InterfaceName: "schemas.capnp:HashFactory",
-			MethodName:    "newSha1",
+			InterfaceName: "schemas.capnp:PromiseBroker",
+			MethodName:    "newPromise",
 		},
 		Options: capnp.NewCallOptions(opts),
 	}
 	if params != nil {
 		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 0}
-		call.ParamsFunc = func(s capnp.Struct) error { return params(HashFactory_newSha1_Params{Struct: s}) }
+		call.ParamsFunc = func(s capnp.Struct) error { return params(PromiseBroker_newPromise_Params{Struct: s}) }
 	}
-	return HashFactory_newSha1_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+	return PromiseBroker_newPromise_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
 }
 
-type HashFactory_Server interface {
-	NewSha1(HashFactory_newSha1) error
+type PromiseBroker_Server interface {
+	NewPromise(PromiseBroker_newPromise) error
 }
 
-func HashFactory_ServerToClient(s HashFactory_Server) HashFactory {
+func PromiseBroker_ServerToClient(s PromiseBroker_Server) PromiseBroker {
 	c, _ := s.(server.Closer)
-	return HashFactory{Client: server.New(HashFactory_Methods(nil, s), c)}
+	return PromiseBroker{Client: server.New(PromiseBroker_Methods(nil, s), c)}
 }
 
-func HashFactory_Methods(methods []server.Method, s HashFactory_Server) []server.Method {
+func PromiseBroker_Methods(methods []server.Method, s PromiseBroker_Server) []server.Method {
 	if cap(methods) == 0 {
 		methods = make([]server.Method, 0, 1)
 	}
 
 	methods = append(methods, server.Method{
 		Method: capnp.Method{
-			InterfaceID:   0xe17a62d19f60961b,
+			InterfaceID:   0xa1a44809e3de3511,
 			MethodID:      0,
-			InterfaceName: "schemas.capnp:HashFactory",
-			MethodName:    "newSha1",
+			InterfaceName: "schemas.capnp:PromiseBroker",
+			MethodName:    "newPromise",
 		},
 		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
-			call := HashFactory_newSha1{c, opts, HashFactory_newSha1_Params{Struct: p}, HashFactory_newSha1_Results{Struct: r}}
-			return s.NewSha1(call)
+			call := PromiseBroker_newPromise{c, opts, PromiseBroker_newPromise_Params{Struct: p}, PromiseBroker_newPromise_Results{Struct: r}}
+			return s.NewPromise(call)
 		},
 		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 1},
 	})
@@ -67,105 +67,105 @@ func HashFactory_Methods(methods []server.Method, s HashFactory_Server) []server
 	return methods
 }
 
-// HashFactory_newSha1 holds the arguments for a server call to HashFactory.newSha1.
-type HashFactory_newSha1 struct {
+// PromiseBroker_newPromise holds the arguments for a server call to PromiseBroker.newPromise.
+type PromiseBroker_newPromise struct {
 	Ctx     context.Context
 	Options capnp.CallOptions
-	Params  HashFactory_newSha1_Params
-	Results HashFactory_newSha1_Results
+	Params  PromiseBroker_newPromise_Params
+	Results PromiseBroker_newPromise_Results
 }
 
-type HashFactory_newSha1_Params struct{ capnp.Struct }
+type PromiseBroker_newPromise_Params struct{ capnp.Struct }
 
-// HashFactory_newSha1_Params_TypeID is the unique identifier for the type HashFactory_newSha1_Params.
-const HashFactory_newSha1_Params_TypeID = 0xcc33bc870fc6d6e0
+// PromiseBroker_newPromise_Params_TypeID is the unique identifier for the type PromiseBroker_newPromise_Params.
+const PromiseBroker_newPromise_Params_TypeID = 0xaee4b07a0a90abfe
 
-func NewHashFactory_newSha1_Params(s *capnp.Segment) (HashFactory_newSha1_Params, error) {
+func NewPromiseBroker_newPromise_Params(s *capnp.Segment) (PromiseBroker_newPromise_Params, error) {
 	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return HashFactory_newSha1_Params{st}, err
+	return PromiseBroker_newPromise_Params{st}, err
 }
 
-func NewRootHashFactory_newSha1_Params(s *capnp.Segment) (HashFactory_newSha1_Params, error) {
+func NewRootPromiseBroker_newPromise_Params(s *capnp.Segment) (PromiseBroker_newPromise_Params, error) {
 	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return HashFactory_newSha1_Params{st}, err
+	return PromiseBroker_newPromise_Params{st}, err
 }
 
-func ReadRootHashFactory_newSha1_Params(msg *capnp.Message) (HashFactory_newSha1_Params, error) {
+func ReadRootPromiseBroker_newPromise_Params(msg *capnp.Message) (PromiseBroker_newPromise_Params, error) {
 	root, err := msg.RootPtr()
-	return HashFactory_newSha1_Params{root.Struct()}, err
+	return PromiseBroker_newPromise_Params{root.Struct()}, err
 }
 
-func (s HashFactory_newSha1_Params) String() string {
-	str, _ := text.Marshal(0xcc33bc870fc6d6e0, s.Struct)
+func (s PromiseBroker_newPromise_Params) String() string {
+	str, _ := text.Marshal(0xaee4b07a0a90abfe, s.Struct)
 	return str
 }
 
-// HashFactory_newSha1_Params_List is a list of HashFactory_newSha1_Params.
-type HashFactory_newSha1_Params_List struct{ capnp.List }
+// PromiseBroker_newPromise_Params_List is a list of PromiseBroker_newPromise_Params.
+type PromiseBroker_newPromise_Params_List struct{ capnp.List }
 
-// NewHashFactory_newSha1_Params creates a new list of HashFactory_newSha1_Params.
-func NewHashFactory_newSha1_Params_List(s *capnp.Segment, sz int32) (HashFactory_newSha1_Params_List, error) {
+// NewPromiseBroker_newPromise_Params creates a new list of PromiseBroker_newPromise_Params.
+func NewPromiseBroker_newPromise_Params_List(s *capnp.Segment, sz int32) (PromiseBroker_newPromise_Params_List, error) {
 	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
-	return HashFactory_newSha1_Params_List{l}, err
+	return PromiseBroker_newPromise_Params_List{l}, err
 }
 
-func (s HashFactory_newSha1_Params_List) At(i int) HashFactory_newSha1_Params {
-	return HashFactory_newSha1_Params{s.List.Struct(i)}
+func (s PromiseBroker_newPromise_Params_List) At(i int) PromiseBroker_newPromise_Params {
+	return PromiseBroker_newPromise_Params{s.List.Struct(i)}
 }
 
-func (s HashFactory_newSha1_Params_List) Set(i int, v HashFactory_newSha1_Params) error {
+func (s PromiseBroker_newPromise_Params_List) Set(i int, v PromiseBroker_newPromise_Params) error {
 	return s.List.SetStruct(i, v.Struct)
 }
 
-func (s HashFactory_newSha1_Params_List) String() string {
-	str, _ := text.MarshalList(0xcc33bc870fc6d6e0, s.List)
+func (s PromiseBroker_newPromise_Params_List) String() string {
+	str, _ := text.MarshalList(0xaee4b07a0a90abfe, s.List)
 	return str
 }
 
-// HashFactory_newSha1_Params_Promise is a wrapper for a HashFactory_newSha1_Params promised by a client call.
-type HashFactory_newSha1_Params_Promise struct{ *capnp.Pipeline }
+// PromiseBroker_newPromise_Params_Promise is a wrapper for a PromiseBroker_newPromise_Params promised by a client call.
+type PromiseBroker_newPromise_Params_Promise struct{ *capnp.Pipeline }
 
-func (p HashFactory_newSha1_Params_Promise) Struct() (HashFactory_newSha1_Params, error) {
+func (p PromiseBroker_newPromise_Params_Promise) Struct() (PromiseBroker_newPromise_Params, error) {
 	s, err := p.Pipeline.Struct()
-	return HashFactory_newSha1_Params{s}, err
+	return PromiseBroker_newPromise_Params{s}, err
 }
 
-type HashFactory_newSha1_Results struct{ capnp.Struct }
+type PromiseBroker_newPromise_Results struct{ capnp.Struct }
 
-// HashFactory_newSha1_Results_TypeID is the unique identifier for the type HashFactory_newSha1_Results.
-const HashFactory_newSha1_Results_TypeID = 0xe777f75a1992adaa
+// PromiseBroker_newPromise_Results_TypeID is the unique identifier for the type PromiseBroker_newPromise_Results.
+const PromiseBroker_newPromise_Results_TypeID = 0xb3c987e955c1f2c5
 
-func NewHashFactory_newSha1_Results(s *capnp.Segment) (HashFactory_newSha1_Results, error) {
+func NewPromiseBroker_newPromise_Results(s *capnp.Segment) (PromiseBroker_newPromise_Results, error) {
 	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return HashFactory_newSha1_Results{st}, err
+	return PromiseBroker_newPromise_Results{st}, err
 }
 
-func NewRootHashFactory_newSha1_Results(s *capnp.Segment) (HashFactory_newSha1_Results, error) {
+func NewRootPromiseBroker_newPromise_Results(s *capnp.Segment) (PromiseBroker_newPromise_Results, error) {
 	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return HashFactory_newSha1_Results{st}, err
+	return PromiseBroker_newPromise_Results{st}, err
 }
 
-func ReadRootHashFactory_newSha1_Results(msg *capnp.Message) (HashFactory_newSha1_Results, error) {
+func ReadRootPromiseBroker_newPromise_Results(msg *capnp.Message) (PromiseBroker_newPromise_Results, error) {
 	root, err := msg.RootPtr()
-	return HashFactory_newSha1_Results{root.Struct()}, err
+	return PromiseBroker_newPromise_Results{root.Struct()}, err
 }
 
-func (s HashFactory_newSha1_Results) String() string {
-	str, _ := text.Marshal(0xe777f75a1992adaa, s.Struct)
+func (s PromiseBroker_newPromise_Results) String() string {
+	str, _ := text.Marshal(0xb3c987e955c1f2c5, s.Struct)
 	return str
 }
 
-func (s HashFactory_newSha1_Results) Hash() Hash {
+func (s PromiseBroker_newPromise_Results) Promise() Promise {
 	p, _ := s.Struct.Ptr(0)
-	return Hash{Client: p.Interface().Client()}
+	return Promise{Client: p.Interface().Client()}
 }
 
-func (s HashFactory_newSha1_Results) HasHash() bool {
+func (s PromiseBroker_newPromise_Results) HasPromise() bool {
 	p, err := s.Struct.Ptr(0)
 	return p.IsValid() || err != nil
 }
 
-func (s HashFactory_newSha1_Results) SetHash(v Hash) error {
+func (s PromiseBroker_newPromise_Results) SetPromise(v Promise) error {
 	if v.Client == nil {
 		return s.Struct.SetPtr(0, capnp.Ptr{})
 	}
@@ -174,431 +174,646 @@ func (s HashFactory_newSha1_Results) SetHash(v Hash) error {
 	return s.Struct.SetPtr(0, in.ToPtr())
 }
 
-// HashFactory_newSha1_Results_List is a list of HashFactory_newSha1_Results.
-type HashFactory_newSha1_Results_List struct{ capnp.List }
+// PromiseBroker_newPromise_Results_List is a list of PromiseBroker_newPromise_Results.
+type PromiseBroker_newPromise_Results_List struct{ capnp.List }
 
-// NewHashFactory_newSha1_Results creates a new list of HashFactory_newSha1_Results.
-func NewHashFactory_newSha1_Results_List(s *capnp.Segment, sz int32) (HashFactory_newSha1_Results_List, error) {
+// NewPromiseBroker_newPromise_Results creates a new list of PromiseBroker_newPromise_Results.
+func NewPromiseBroker_newPromise_Results_List(s *capnp.Segment, sz int32) (PromiseBroker_newPromise_Results_List, error) {
 	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
-	return HashFactory_newSha1_Results_List{l}, err
+	return PromiseBroker_newPromise_Results_List{l}, err
 }
 
-func (s HashFactory_newSha1_Results_List) At(i int) HashFactory_newSha1_Results {
-	return HashFactory_newSha1_Results{s.List.Struct(i)}
+func (s PromiseBroker_newPromise_Results_List) At(i int) PromiseBroker_newPromise_Results {
+	return PromiseBroker_newPromise_Results{s.List.Struct(i)}
 }
 
-func (s HashFactory_newSha1_Results_List) Set(i int, v HashFactory_newSha1_Results) error {
+func (s PromiseBroker_newPromise_Results_List) Set(i int, v PromiseBroker_newPromise_Results) error {
 	return s.List.SetStruct(i, v.Struct)
 }
 
-func (s HashFactory_newSha1_Results_List) String() string {
-	str, _ := text.MarshalList(0xe777f75a1992adaa, s.List)
+func (s PromiseBroker_newPromise_Results_List) String() string {
+	str, _ := text.MarshalList(0xb3c987e955c1f2c5, s.List)
 	return str
 }
 
-// HashFactory_newSha1_Results_Promise is a wrapper for a HashFactory_newSha1_Results promised by a client call.
-type HashFactory_newSha1_Results_Promise struct{ *capnp.Pipeline }
+// PromiseBroker_newPromise_Results_Promise is a wrapper for a PromiseBroker_newPromise_Results promised by a client call.
+type PromiseBroker_newPromise_Results_Promise struct{ *capnp.Pipeline }
 
-func (p HashFactory_newSha1_Results_Promise) Struct() (HashFactory_newSha1_Results, error) {
+func (p PromiseBroker_newPromise_Results_Promise) Struct() (PromiseBroker_newPromise_Results, error) {
 	s, err := p.Pipeline.Struct()
-	return HashFactory_newSha1_Results{s}, err
+	return PromiseBroker_newPromise_Results{s}, err
 }
 
-func (p HashFactory_newSha1_Results_Promise) Hash() Hash {
-	return Hash{Client: p.Pipeline.GetPipeline(0).Client()}
+func (p PromiseBroker_newPromise_Results_Promise) Promise() Promise {
+	return Promise{Client: p.Pipeline.GetPipeline(0).Client()}
 }
 
-type Hash struct{ Client capnp.Client }
+type PromiseCallback struct{ Client capnp.Client }
 
-// Hash_TypeID is the unique identifier for the type Hash.
-const Hash_TypeID = 0xbbd5ccf904da8d77
+// PromiseCallback_TypeID is the unique identifier for the type PromiseCallback.
+const PromiseCallback_TypeID = 0xcdc45f00c61bd87c
 
-func (c Hash) Write(ctx context.Context, params func(Hash_write_Params) error, opts ...capnp.CallOption) Hash_write_Results_Promise {
+func (c PromiseCallback) Done(ctx context.Context, params func(PromiseCallback_done_Params) error, opts ...capnp.CallOption) PromiseCallback_done_Results_Promise {
 	if c.Client == nil {
-		return Hash_write_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+		return PromiseCallback_done_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
 	}
 	call := &capnp.Call{
 		Ctx: ctx,
 		Method: capnp.Method{
-			InterfaceID:   0xbbd5ccf904da8d77,
+			InterfaceID:   0xcdc45f00c61bd87c,
 			MethodID:      0,
-			InterfaceName: "schemas.capnp:Hash",
-			MethodName:    "write",
+			InterfaceName: "schemas.capnp:PromiseCallback",
+			MethodName:    "done",
 		},
 		Options: capnp.NewCallOptions(opts),
 	}
 	if params != nil {
 		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 1}
-		call.ParamsFunc = func(s capnp.Struct) error { return params(Hash_write_Params{Struct: s}) }
+		call.ParamsFunc = func(s capnp.Struct) error { return params(PromiseCallback_done_Params{Struct: s}) }
 	}
-	return Hash_write_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+	return PromiseCallback_done_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
 }
-func (c Hash) Sum(ctx context.Context, params func(Hash_sum_Params) error, opts ...capnp.CallOption) Hash_sum_Results_Promise {
+
+type PromiseCallback_Server interface {
+	Done(PromiseCallback_done) error
+}
+
+func PromiseCallback_ServerToClient(s PromiseCallback_Server) PromiseCallback {
+	c, _ := s.(server.Closer)
+	return PromiseCallback{Client: server.New(PromiseCallback_Methods(nil, s), c)}
+}
+
+func PromiseCallback_Methods(methods []server.Method, s PromiseCallback_Server) []server.Method {
+	if cap(methods) == 0 {
+		methods = make([]server.Method, 0, 1)
+	}
+
+	methods = append(methods, server.Method{
+		Method: capnp.Method{
+			InterfaceID:   0xcdc45f00c61bd87c,
+			MethodID:      0,
+			InterfaceName: "schemas.capnp:PromiseCallback",
+			MethodName:    "done",
+		},
+		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
+			call := PromiseCallback_done{c, opts, PromiseCallback_done_Params{Struct: p}, PromiseCallback_done_Results{Struct: r}}
+			return s.Done(call)
+		},
+		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 0},
+	})
+
+	return methods
+}
+
+// PromiseCallback_done holds the arguments for a server call to PromiseCallback.done.
+type PromiseCallback_done struct {
+	Ctx     context.Context
+	Options capnp.CallOptions
+	Params  PromiseCallback_done_Params
+	Results PromiseCallback_done_Results
+}
+
+type PromiseCallback_done_Params struct{ capnp.Struct }
+
+// PromiseCallback_done_Params_TypeID is the unique identifier for the type PromiseCallback_done_Params.
+const PromiseCallback_done_Params_TypeID = 0x843d0a7e2ea8a6ae
+
+func NewPromiseCallback_done_Params(s *capnp.Segment) (PromiseCallback_done_Params, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PromiseCallback_done_Params{st}, err
+}
+
+func NewRootPromiseCallback_done_Params(s *capnp.Segment) (PromiseCallback_done_Params, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PromiseCallback_done_Params{st}, err
+}
+
+func ReadRootPromiseCallback_done_Params(msg *capnp.Message) (PromiseCallback_done_Params, error) {
+	root, err := msg.RootPtr()
+	return PromiseCallback_done_Params{root.Struct()}, err
+}
+
+func (s PromiseCallback_done_Params) String() string {
+	str, _ := text.Marshal(0x843d0a7e2ea8a6ae, s.Struct)
+	return str
+}
+
+func (s PromiseCallback_done_Params) Data() ([]byte, error) {
+	p, err := s.Struct.Ptr(0)
+	return []byte(p.Data()), err
+}
+
+func (s PromiseCallback_done_Params) HasData() bool {
+	p, err := s.Struct.Ptr(0)
+	return p.IsValid() || err != nil
+}
+
+func (s PromiseCallback_done_Params) SetData(v []byte) error {
+	return s.Struct.SetData(0, v)
+}
+
+// PromiseCallback_done_Params_List is a list of PromiseCallback_done_Params.
+type PromiseCallback_done_Params_List struct{ capnp.List }
+
+// NewPromiseCallback_done_Params creates a new list of PromiseCallback_done_Params.
+func NewPromiseCallback_done_Params_List(s *capnp.Segment, sz int32) (PromiseCallback_done_Params_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
+	return PromiseCallback_done_Params_List{l}, err
+}
+
+func (s PromiseCallback_done_Params_List) At(i int) PromiseCallback_done_Params {
+	return PromiseCallback_done_Params{s.List.Struct(i)}
+}
+
+func (s PromiseCallback_done_Params_List) Set(i int, v PromiseCallback_done_Params) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PromiseCallback_done_Params_List) String() string {
+	str, _ := text.MarshalList(0x843d0a7e2ea8a6ae, s.List)
+	return str
+}
+
+// PromiseCallback_done_Params_Promise is a wrapper for a PromiseCallback_done_Params promised by a client call.
+type PromiseCallback_done_Params_Promise struct{ *capnp.Pipeline }
+
+func (p PromiseCallback_done_Params_Promise) Struct() (PromiseCallback_done_Params, error) {
+	s, err := p.Pipeline.Struct()
+	return PromiseCallback_done_Params{s}, err
+}
+
+type PromiseCallback_done_Results struct{ capnp.Struct }
+
+// PromiseCallback_done_Results_TypeID is the unique identifier for the type PromiseCallback_done_Results.
+const PromiseCallback_done_Results_TypeID = 0xa6dd748c621fe1d9
+
+func NewPromiseCallback_done_Results(s *capnp.Segment) (PromiseCallback_done_Results, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return PromiseCallback_done_Results{st}, err
+}
+
+func NewRootPromiseCallback_done_Results(s *capnp.Segment) (PromiseCallback_done_Results, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return PromiseCallback_done_Results{st}, err
+}
+
+func ReadRootPromiseCallback_done_Results(msg *capnp.Message) (PromiseCallback_done_Results, error) {
+	root, err := msg.RootPtr()
+	return PromiseCallback_done_Results{root.Struct()}, err
+}
+
+func (s PromiseCallback_done_Results) String() string {
+	str, _ := text.Marshal(0xa6dd748c621fe1d9, s.Struct)
+	return str
+}
+
+// PromiseCallback_done_Results_List is a list of PromiseCallback_done_Results.
+type PromiseCallback_done_Results_List struct{ capnp.List }
+
+// NewPromiseCallback_done_Results creates a new list of PromiseCallback_done_Results.
+func NewPromiseCallback_done_Results_List(s *capnp.Segment, sz int32) (PromiseCallback_done_Results_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
+	return PromiseCallback_done_Results_List{l}, err
+}
+
+func (s PromiseCallback_done_Results_List) At(i int) PromiseCallback_done_Results {
+	return PromiseCallback_done_Results{s.List.Struct(i)}
+}
+
+func (s PromiseCallback_done_Results_List) Set(i int, v PromiseCallback_done_Results) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PromiseCallback_done_Results_List) String() string {
+	str, _ := text.MarshalList(0xa6dd748c621fe1d9, s.List)
+	return str
+}
+
+// PromiseCallback_done_Results_Promise is a wrapper for a PromiseCallback_done_Results promised by a client call.
+type PromiseCallback_done_Results_Promise struct{ *capnp.Pipeline }
+
+func (p PromiseCallback_done_Results_Promise) Struct() (PromiseCallback_done_Results, error) {
+	s, err := p.Pipeline.Struct()
+	return PromiseCallback_done_Results{s}, err
+}
+
+type Promise struct{ Client capnp.Client }
+
+// Promise_TypeID is the unique identifier for the type Promise.
+const Promise_TypeID = 0xf6030fd8f7f3b8be
+
+func (c Promise) Then(ctx context.Context, params func(Promise_then_Params) error, opts ...capnp.CallOption) Promise_then_Results_Promise {
 	if c.Client == nil {
-		return Hash_sum_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+		return Promise_then_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
 	}
 	call := &capnp.Call{
 		Ctx: ctx,
 		Method: capnp.Method{
-			InterfaceID:   0xbbd5ccf904da8d77,
-			MethodID:      1,
-			InterfaceName: "schemas.capnp:Hash",
-			MethodName:    "sum",
+			InterfaceID:   0xf6030fd8f7f3b8be,
+			MethodID:      0,
+			InterfaceName: "schemas.capnp:Promise",
+			MethodName:    "then",
 		},
 		Options: capnp.NewCallOptions(opts),
 	}
 	if params != nil {
-		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 0}
-		call.ParamsFunc = func(s capnp.Struct) error { return params(Hash_sum_Params{Struct: s}) }
+		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 1}
+		call.ParamsFunc = func(s capnp.Struct) error { return params(Promise_then_Params{Struct: s}) }
 	}
-	return Hash_sum_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+	return Promise_then_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+}
+func (c Promise) Resolve(ctx context.Context, params func(Promise_resolve_Params) error, opts ...capnp.CallOption) Promise_resolve_Results_Promise {
+	if c.Client == nil {
+		return Promise_resolve_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+	}
+	call := &capnp.Call{
+		Ctx: ctx,
+		Method: capnp.Method{
+			InterfaceID:   0xf6030fd8f7f3b8be,
+			MethodID:      1,
+			InterfaceName: "schemas.capnp:Promise",
+			MethodName:    "resolve",
+		},
+		Options: capnp.NewCallOptions(opts),
+	}
+	if params != nil {
+		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 1}
+		call.ParamsFunc = func(s capnp.Struct) error { return params(Promise_resolve_Params{Struct: s}) }
+	}
+	return Promise_resolve_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
 }
 
-type Hash_Server interface {
-	Write(Hash_write) error
+type Promise_Server interface {
+	Then(Promise_then) error
 
-	Sum(Hash_sum) error
+	Resolve(Promise_resolve) error
 }
 
-func Hash_ServerToClient(s Hash_Server) Hash {
+func Promise_ServerToClient(s Promise_Server) Promise {
 	c, _ := s.(server.Closer)
-	return Hash{Client: server.New(Hash_Methods(nil, s), c)}
+	return Promise{Client: server.New(Promise_Methods(nil, s), c)}
 }
 
-func Hash_Methods(methods []server.Method, s Hash_Server) []server.Method {
+func Promise_Methods(methods []server.Method, s Promise_Server) []server.Method {
 	if cap(methods) == 0 {
 		methods = make([]server.Method, 0, 2)
 	}
 
 	methods = append(methods, server.Method{
 		Method: capnp.Method{
-			InterfaceID:   0xbbd5ccf904da8d77,
+			InterfaceID:   0xf6030fd8f7f3b8be,
 			MethodID:      0,
-			InterfaceName: "schemas.capnp:Hash",
-			MethodName:    "write",
+			InterfaceName: "schemas.capnp:Promise",
+			MethodName:    "then",
 		},
 		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
-			call := Hash_write{c, opts, Hash_write_Params{Struct: p}, Hash_write_Results{Struct: r}}
-			return s.Write(call)
+			call := Promise_then{c, opts, Promise_then_Params{Struct: p}, Promise_then_Results{Struct: r}}
+			return s.Then(call)
 		},
 		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 0},
 	})
 
 	methods = append(methods, server.Method{
 		Method: capnp.Method{
-			InterfaceID:   0xbbd5ccf904da8d77,
+			InterfaceID:   0xf6030fd8f7f3b8be,
 			MethodID:      1,
-			InterfaceName: "schemas.capnp:Hash",
-			MethodName:    "sum",
+			InterfaceName: "schemas.capnp:Promise",
+			MethodName:    "resolve",
 		},
 		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
-			call := Hash_sum{c, opts, Hash_sum_Params{Struct: p}, Hash_sum_Results{Struct: r}}
-			return s.Sum(call)
+			call := Promise_resolve{c, opts, Promise_resolve_Params{Struct: p}, Promise_resolve_Results{Struct: r}}
+			return s.Resolve(call)
 		},
-		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 1},
+		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 0},
 	})
 
 	return methods
 }
 
-// Hash_write holds the arguments for a server call to Hash.write.
-type Hash_write struct {
+// Promise_then holds the arguments for a server call to Promise.then.
+type Promise_then struct {
 	Ctx     context.Context
 	Options capnp.CallOptions
-	Params  Hash_write_Params
-	Results Hash_write_Results
+	Params  Promise_then_Params
+	Results Promise_then_Results
 }
 
-// Hash_sum holds the arguments for a server call to Hash.sum.
-type Hash_sum struct {
+// Promise_resolve holds the arguments for a server call to Promise.resolve.
+type Promise_resolve struct {
 	Ctx     context.Context
 	Options capnp.CallOptions
-	Params  Hash_sum_Params
-	Results Hash_sum_Results
+	Params  Promise_resolve_Params
+	Results Promise_resolve_Results
 }
 
-type Hash_write_Params struct{ capnp.Struct }
+type Promise_then_Params struct{ capnp.Struct }
 
-// Hash_write_Params_TypeID is the unique identifier for the type Hash_write_Params.
-const Hash_write_Params_TypeID = 0xb620e8a9405a73e7
+// Promise_then_Params_TypeID is the unique identifier for the type Promise_then_Params.
+const Promise_then_Params_TypeID = 0x8844632fdcedadc9
 
-func NewHash_write_Params(s *capnp.Segment) (Hash_write_Params, error) {
+func NewPromise_then_Params(s *capnp.Segment) (Promise_then_Params, error) {
 	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return Hash_write_Params{st}, err
+	return Promise_then_Params{st}, err
 }
 
-func NewRootHash_write_Params(s *capnp.Segment) (Hash_write_Params, error) {
+func NewRootPromise_then_Params(s *capnp.Segment) (Promise_then_Params, error) {
 	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return Hash_write_Params{st}, err
+	return Promise_then_Params{st}, err
 }
 
-func ReadRootHash_write_Params(msg *capnp.Message) (Hash_write_Params, error) {
+func ReadRootPromise_then_Params(msg *capnp.Message) (Promise_then_Params, error) {
 	root, err := msg.RootPtr()
-	return Hash_write_Params{root.Struct()}, err
+	return Promise_then_Params{root.Struct()}, err
 }
 
-func (s Hash_write_Params) String() string {
-	str, _ := text.Marshal(0xb620e8a9405a73e7, s.Struct)
+func (s Promise_then_Params) String() string {
+	str, _ := text.Marshal(0x8844632fdcedadc9, s.Struct)
 	return str
 }
 
-func (s Hash_write_Params) Data() ([]byte, error) {
-	p, err := s.Struct.Ptr(0)
-	return []byte(p.Data()), err
+func (s Promise_then_Params) Callback() PromiseCallback {
+	p, _ := s.Struct.Ptr(0)
+	return PromiseCallback{Client: p.Interface().Client()}
 }
 
-func (s Hash_write_Params) HasData() bool {
+func (s Promise_then_Params) HasCallback() bool {
 	p, err := s.Struct.Ptr(0)
 	return p.IsValid() || err != nil
 }
 
-func (s Hash_write_Params) SetData(v []byte) error {
-	return s.Struct.SetData(0, v)
+func (s Promise_then_Params) SetCallback(v PromiseCallback) error {
+	if v.Client == nil {
+		return s.Struct.SetPtr(0, capnp.Ptr{})
+	}
+	seg := s.Segment()
+	in := capnp.NewInterface(seg, seg.Message().AddCap(v.Client))
+	return s.Struct.SetPtr(0, in.ToPtr())
 }
 
-// Hash_write_Params_List is a list of Hash_write_Params.
-type Hash_write_Params_List struct{ capnp.List }
+// Promise_then_Params_List is a list of Promise_then_Params.
+type Promise_then_Params_List struct{ capnp.List }
 
-// NewHash_write_Params creates a new list of Hash_write_Params.
-func NewHash_write_Params_List(s *capnp.Segment, sz int32) (Hash_write_Params_List, error) {
+// NewPromise_then_Params creates a new list of Promise_then_Params.
+func NewPromise_then_Params_List(s *capnp.Segment, sz int32) (Promise_then_Params_List, error) {
 	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
-	return Hash_write_Params_List{l}, err
+	return Promise_then_Params_List{l}, err
 }
 
-func (s Hash_write_Params_List) At(i int) Hash_write_Params {
-	return Hash_write_Params{s.List.Struct(i)}
+func (s Promise_then_Params_List) At(i int) Promise_then_Params {
+	return Promise_then_Params{s.List.Struct(i)}
 }
 
-func (s Hash_write_Params_List) Set(i int, v Hash_write_Params) error {
+func (s Promise_then_Params_List) Set(i int, v Promise_then_Params) error {
 	return s.List.SetStruct(i, v.Struct)
 }
 
-func (s Hash_write_Params_List) String() string {
-	str, _ := text.MarshalList(0xb620e8a9405a73e7, s.List)
+func (s Promise_then_Params_List) String() string {
+	str, _ := text.MarshalList(0x8844632fdcedadc9, s.List)
 	return str
 }
 
-// Hash_write_Params_Promise is a wrapper for a Hash_write_Params promised by a client call.
-type Hash_write_Params_Promise struct{ *capnp.Pipeline }
+// Promise_then_Params_Promise is a wrapper for a Promise_then_Params promised by a client call.
+type Promise_then_Params_Promise struct{ *capnp.Pipeline }
 
-func (p Hash_write_Params_Promise) Struct() (Hash_write_Params, error) {
+func (p Promise_then_Params_Promise) Struct() (Promise_then_Params, error) {
 	s, err := p.Pipeline.Struct()
-	return Hash_write_Params{s}, err
+	return Promise_then_Params{s}, err
 }
 
-type Hash_write_Results struct{ capnp.Struct }
+func (p Promise_then_Params_Promise) Callback() PromiseCallback {
+	return PromiseCallback{Client: p.Pipeline.GetPipeline(0).Client()}
+}
 
-// Hash_write_Results_TypeID is the unique identifier for the type Hash_write_Results.
-const Hash_write_Results_TypeID = 0x8d06c7cb3882d565
+type Promise_then_Results struct{ capnp.Struct }
 
-func NewHash_write_Results(s *capnp.Segment) (Hash_write_Results, error) {
+// Promise_then_Results_TypeID is the unique identifier for the type Promise_then_Results.
+const Promise_then_Results_TypeID = 0xf7de0422df00545c
+
+func NewPromise_then_Results(s *capnp.Segment) (Promise_then_Results, error) {
 	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return Hash_write_Results{st}, err
+	return Promise_then_Results{st}, err
 }
 
-func NewRootHash_write_Results(s *capnp.Segment) (Hash_write_Results, error) {
+func NewRootPromise_then_Results(s *capnp.Segment) (Promise_then_Results, error) {
 	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return Hash_write_Results{st}, err
+	return Promise_then_Results{st}, err
 }
 
-func ReadRootHash_write_Results(msg *capnp.Message) (Hash_write_Results, error) {
+func ReadRootPromise_then_Results(msg *capnp.Message) (Promise_then_Results, error) {
 	root, err := msg.RootPtr()
-	return Hash_write_Results{root.Struct()}, err
+	return Promise_then_Results{root.Struct()}, err
 }
 
-func (s Hash_write_Results) String() string {
-	str, _ := text.Marshal(0x8d06c7cb3882d565, s.Struct)
+func (s Promise_then_Results) String() string {
+	str, _ := text.Marshal(0xf7de0422df00545c, s.Struct)
 	return str
 }
 
-// Hash_write_Results_List is a list of Hash_write_Results.
-type Hash_write_Results_List struct{ capnp.List }
+// Promise_then_Results_List is a list of Promise_then_Results.
+type Promise_then_Results_List struct{ capnp.List }
 
-// NewHash_write_Results creates a new list of Hash_write_Results.
-func NewHash_write_Results_List(s *capnp.Segment, sz int32) (Hash_write_Results_List, error) {
+// NewPromise_then_Results creates a new list of Promise_then_Results.
+func NewPromise_then_Results_List(s *capnp.Segment, sz int32) (Promise_then_Results_List, error) {
 	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
-	return Hash_write_Results_List{l}, err
+	return Promise_then_Results_List{l}, err
 }
 
-func (s Hash_write_Results_List) At(i int) Hash_write_Results {
-	return Hash_write_Results{s.List.Struct(i)}
+func (s Promise_then_Results_List) At(i int) Promise_then_Results {
+	return Promise_then_Results{s.List.Struct(i)}
 }
 
-func (s Hash_write_Results_List) Set(i int, v Hash_write_Results) error {
+func (s Promise_then_Results_List) Set(i int, v Promise_then_Results) error {
 	return s.List.SetStruct(i, v.Struct)
 }
 
-func (s Hash_write_Results_List) String() string {
-	str, _ := text.MarshalList(0x8d06c7cb3882d565, s.List)
+func (s Promise_then_Results_List) String() string {
+	str, _ := text.MarshalList(0xf7de0422df00545c, s.List)
 	return str
 }
 
-// Hash_write_Results_Promise is a wrapper for a Hash_write_Results promised by a client call.
-type Hash_write_Results_Promise struct{ *capnp.Pipeline }
+// Promise_then_Results_Promise is a wrapper for a Promise_then_Results promised by a client call.
+type Promise_then_Results_Promise struct{ *capnp.Pipeline }
 
-func (p Hash_write_Results_Promise) Struct() (Hash_write_Results, error) {
+func (p Promise_then_Results_Promise) Struct() (Promise_then_Results, error) {
 	s, err := p.Pipeline.Struct()
-	return Hash_write_Results{s}, err
+	return Promise_then_Results{s}, err
 }
 
-type Hash_sum_Params struct{ capnp.Struct }
+type Promise_resolve_Params struct{ capnp.Struct }
 
-// Hash_sum_Params_TypeID is the unique identifier for the type Hash_sum_Params.
-const Hash_sum_Params_TypeID = 0xa56d1a4022c38af3
+// Promise_resolve_Params_TypeID is the unique identifier for the type Promise_resolve_Params.
+const Promise_resolve_Params_TypeID = 0xdb857c1a79d7afe8
 
-func NewHash_sum_Params(s *capnp.Segment) (Hash_sum_Params, error) {
-	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return Hash_sum_Params{st}, err
-}
-
-func NewRootHash_sum_Params(s *capnp.Segment) (Hash_sum_Params, error) {
-	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
-	return Hash_sum_Params{st}, err
-}
-
-func ReadRootHash_sum_Params(msg *capnp.Message) (Hash_sum_Params, error) {
-	root, err := msg.RootPtr()
-	return Hash_sum_Params{root.Struct()}, err
-}
-
-func (s Hash_sum_Params) String() string {
-	str, _ := text.Marshal(0xa56d1a4022c38af3, s.Struct)
-	return str
-}
-
-// Hash_sum_Params_List is a list of Hash_sum_Params.
-type Hash_sum_Params_List struct{ capnp.List }
-
-// NewHash_sum_Params creates a new list of Hash_sum_Params.
-func NewHash_sum_Params_List(s *capnp.Segment, sz int32) (Hash_sum_Params_List, error) {
-	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
-	return Hash_sum_Params_List{l}, err
-}
-
-func (s Hash_sum_Params_List) At(i int) Hash_sum_Params { return Hash_sum_Params{s.List.Struct(i)} }
-
-func (s Hash_sum_Params_List) Set(i int, v Hash_sum_Params) error {
-	return s.List.SetStruct(i, v.Struct)
-}
-
-func (s Hash_sum_Params_List) String() string {
-	str, _ := text.MarshalList(0xa56d1a4022c38af3, s.List)
-	return str
-}
-
-// Hash_sum_Params_Promise is a wrapper for a Hash_sum_Params promised by a client call.
-type Hash_sum_Params_Promise struct{ *capnp.Pipeline }
-
-func (p Hash_sum_Params_Promise) Struct() (Hash_sum_Params, error) {
-	s, err := p.Pipeline.Struct()
-	return Hash_sum_Params{s}, err
-}
-
-type Hash_sum_Results struct{ capnp.Struct }
-
-// Hash_sum_Results_TypeID is the unique identifier for the type Hash_sum_Results.
-const Hash_sum_Results_TypeID = 0x83fb5ff693cfa51e
-
-func NewHash_sum_Results(s *capnp.Segment) (Hash_sum_Results, error) {
+func NewPromise_resolve_Params(s *capnp.Segment) (Promise_resolve_Params, error) {
 	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return Hash_sum_Results{st}, err
+	return Promise_resolve_Params{st}, err
 }
 
-func NewRootHash_sum_Results(s *capnp.Segment) (Hash_sum_Results, error) {
+func NewRootPromise_resolve_Params(s *capnp.Segment) (Promise_resolve_Params, error) {
 	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
-	return Hash_sum_Results{st}, err
+	return Promise_resolve_Params{st}, err
 }
 
-func ReadRootHash_sum_Results(msg *capnp.Message) (Hash_sum_Results, error) {
+func ReadRootPromise_resolve_Params(msg *capnp.Message) (Promise_resolve_Params, error) {
 	root, err := msg.RootPtr()
-	return Hash_sum_Results{root.Struct()}, err
+	return Promise_resolve_Params{root.Struct()}, err
 }
 
-func (s Hash_sum_Results) String() string {
-	str, _ := text.Marshal(0x83fb5ff693cfa51e, s.Struct)
+func (s Promise_resolve_Params) String() string {
+	str, _ := text.Marshal(0xdb857c1a79d7afe8, s.Struct)
 	return str
 }
 
-func (s Hash_sum_Results) Hash() ([]byte, error) {
+func (s Promise_resolve_Params) Data() ([]byte, error) {
 	p, err := s.Struct.Ptr(0)
 	return []byte(p.Data()), err
 }
 
-func (s Hash_sum_Results) HasHash() bool {
+func (s Promise_resolve_Params) HasData() bool {
 	p, err := s.Struct.Ptr(0)
 	return p.IsValid() || err != nil
 }
 
-func (s Hash_sum_Results) SetHash(v []byte) error {
+func (s Promise_resolve_Params) SetData(v []byte) error {
 	return s.Struct.SetData(0, v)
 }
 
-// Hash_sum_Results_List is a list of Hash_sum_Results.
-type Hash_sum_Results_List struct{ capnp.List }
+// Promise_resolve_Params_List is a list of Promise_resolve_Params.
+type Promise_resolve_Params_List struct{ capnp.List }
 
-// NewHash_sum_Results creates a new list of Hash_sum_Results.
-func NewHash_sum_Results_List(s *capnp.Segment, sz int32) (Hash_sum_Results_List, error) {
+// NewPromise_resolve_Params creates a new list of Promise_resolve_Params.
+func NewPromise_resolve_Params_List(s *capnp.Segment, sz int32) (Promise_resolve_Params_List, error) {
 	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
-	return Hash_sum_Results_List{l}, err
+	return Promise_resolve_Params_List{l}, err
 }
 
-func (s Hash_sum_Results_List) At(i int) Hash_sum_Results { return Hash_sum_Results{s.List.Struct(i)} }
+func (s Promise_resolve_Params_List) At(i int) Promise_resolve_Params {
+	return Promise_resolve_Params{s.List.Struct(i)}
+}
 
-func (s Hash_sum_Results_List) Set(i int, v Hash_sum_Results) error {
+func (s Promise_resolve_Params_List) Set(i int, v Promise_resolve_Params) error {
 	return s.List.SetStruct(i, v.Struct)
 }
 
-func (s Hash_sum_Results_List) String() string {
-	str, _ := text.MarshalList(0x83fb5ff693cfa51e, s.List)
+func (s Promise_resolve_Params_List) String() string {
+	str, _ := text.MarshalList(0xdb857c1a79d7afe8, s.List)
 	return str
 }
 
-// Hash_sum_Results_Promise is a wrapper for a Hash_sum_Results promised by a client call.
-type Hash_sum_Results_Promise struct{ *capnp.Pipeline }
+// Promise_resolve_Params_Promise is a wrapper for a Promise_resolve_Params promised by a client call.
+type Promise_resolve_Params_Promise struct{ *capnp.Pipeline }
 
-func (p Hash_sum_Results_Promise) Struct() (Hash_sum_Results, error) {
+func (p Promise_resolve_Params_Promise) Struct() (Promise_resolve_Params, error) {
 	s, err := p.Pipeline.Struct()
-	return Hash_sum_Results{s}, err
+	return Promise_resolve_Params{s}, err
 }
 
-const schema_85d3acc39d94e0f8 = "x\xda\x8c\x92;h\x14Q\x18\x85\xcf\xb9s'\x13\x84" +
-	"5^\xaeM\"\x98\x10bc\xb1\xb0n\xa3\x82d\xb0" +
-	"\xf0\x05\xc2\xce\x8aM@\xf4\xba\x0e\x8c\xe0\xc4\xb0w\x97" +
-	"%6\x82\x12\x02\xc2\x16>\x10\x14\x82U\x8a\x88\x16\x16" +
-	"\xdah\x170\x85\x01\xf1\x11\x0b\xabX\xc5Z\xc1g1" +
-	"\xb23Nv!&\xd8\x0d\xfc?\xdf\xf9\xe6\x9e\x7f\xc7" +
-	"{_\x94\xdc%\x01\x04#n_\xb2{\xfe\xf5\xedo" +
-	"g\x7f_\x87\xd2\x04\\z\x80>\xce_\xa0>\xc9q" +
-	"0\x09W\xae\xed\x7f\xb5\xd4\xd7\xce\xe6\xd2\x03\xca1\xb7" +
-	"\x112\xf9zcq\xd4\x1f\x8a\xe7\xbb\x13}\x9a_ " +
-	"\x935;\xe1/|\x1ey\xd6\x83,\x1f\xa0 \xa8\x0f" +
-	"\xa5\xccV\xfb\xa3\xfc\xb9\xbc\xf2\x1cj\xbb\x93\xfcX\xbd" +
-	"3\xb7\xf8\xe8\xdd\x0c@}\x86\xf7u\x98*\x18\xce\xea" +
-	"'\x9d\xafd\xf5\xc3\xcb\x81\xd9\x17\xe5e\xa8\xa1\\\xe0" +
-	"\x1eOt\x04v\xdd=\xf7\xe0\xcd\xf9+\x9f6`f" +
-	"\xf8V\xdfL1m\x1e\xd5OS\xcc\xc3\xc7\xb7\x06'" +
-	"\xbe\xb7\xd62L&5\xc7jGj!\x95\xb2\xb5(" +
-	"\x8c\x8d-\x8a\x9a\x99\x9a\x9c:x\xcc\xd8\xa8h\x9b\xf1" +
-	"Xu<\xb4\xcdK\x0d\x1bHG\x02\x92\x80*\xec\x05" +
-	"\x82~\x87\xc1N\xc1\x81\xc8\xd8\x88\x05\x08\x16z N" +
-	"\x0f\xa4U\xbf\xd8\x08\xc7\xaa\x19\x05\xd84\xa82l\xea" +
-	"&\xb6[0*\xe9\x0263\xb9`\x1af\x83\x09s" +
-	"\x8ac\xa3\x0a\x19\xf4;.\xb0^\x11\xf3zUi\x1f" +
-	"\x84\xda\xe3\x91\xeb\xbd2?\x0d58\x0a\xa1\x0a\xdep" +
-	"j\xe1\xd3\xb3\xcd\xd8g\x85\xdd\x10\xd9U=bj\x8d" +
-	"\xcb\xf5\xe9\xe2d\xd8:\x15\x99R\xee\xfc\xcf\xdf\xcev" +
-	"9\xdd\xf1\x92\xa9W^6\xf3\xba\x94:\x0c\xa1\\\xef" +
-	"\xea_\xde\x7f\xe7f\xef\xcd\xadkS\xddS\x04\xa9\xc0" +
-	"?\x01\x00\x00\xff\xff\x8d\x8a\xecH"
+type Promise_resolve_Results struct{ capnp.Struct }
+
+// Promise_resolve_Results_TypeID is the unique identifier for the type Promise_resolve_Results.
+const Promise_resolve_Results_TypeID = 0xbb1bf5b581491d6c
+
+func NewPromise_resolve_Results(s *capnp.Segment) (Promise_resolve_Results, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return Promise_resolve_Results{st}, err
+}
+
+func NewRootPromise_resolve_Results(s *capnp.Segment) (Promise_resolve_Results, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return Promise_resolve_Results{st}, err
+}
+
+func ReadRootPromise_resolve_Results(msg *capnp.Message) (Promise_resolve_Results, error) {
+	root, err := msg.RootPtr()
+	return Promise_resolve_Results{root.Struct()}, err
+}
+
+func (s Promise_resolve_Results) String() string {
+	str, _ := text.Marshal(0xbb1bf5b581491d6c, s.Struct)
+	return str
+}
+
+// Promise_resolve_Results_List is a list of Promise_resolve_Results.
+type Promise_resolve_Results_List struct{ capnp.List }
+
+// NewPromise_resolve_Results creates a new list of Promise_resolve_Results.
+func NewPromise_resolve_Results_List(s *capnp.Segment, sz int32) (Promise_resolve_Results_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
+	return Promise_resolve_Results_List{l}, err
+}
+
+func (s Promise_resolve_Results_List) At(i int) Promise_resolve_Results {
+	return Promise_resolve_Results{s.List.Struct(i)}
+}
+
+func (s Promise_resolve_Results_List) Set(i int, v Promise_resolve_Results) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s Promise_resolve_Results_List) String() string {
+	str, _ := text.MarshalList(0xbb1bf5b581491d6c, s.List)
+	return str
+}
+
+// Promise_resolve_Results_Promise is a wrapper for a Promise_resolve_Results promised by a client call.
+type Promise_resolve_Results_Promise struct{ *capnp.Pipeline }
+
+func (p Promise_resolve_Results_Promise) Struct() (Promise_resolve_Results, error) {
+	s, err := p.Pipeline.Struct()
+	return Promise_resolve_Results{s}, err
+}
+
+const schema_85d3acc39d94e0f8 = "x\xda\x94SOH\x14a\x14\x7f\xef\xcdl\xa3\xd2\xb6" +
+	"|MDj\xb5\x10J \xed\xd6\x16\x1e\x0a\xc2mM" +
+	"\xac \x98Y\xec\x90\x181\xae\x03\xc6\xce\xfeif-" +
+	"\x12I\x82\xc4\x0e\x1d:t\xed\x10\x84\x14\x95E\x11\x04" +
+	"A \xfd\x01\x0f\xd2\xa1CJe\x7f\x0fu\x88\xc0(" +
+	"\x8b\xa0\x89\xef\x1bg\xd7\xdd\xda\xb0\xdb\x07\xef}\xbf\x7f" +
+	"\xef\xbd-\x1b1N\xb1\xc0\x13\x09@\xdf\x14X\xe6\x8e" +
+	"\x8f]\x8e\x9e\xac\xdby\x1a\xd8z\x04\x08\xa0\x02\xb0m" +
+	"\x0a\x93\x08\xa8\xce`\x1b\xa0;y\xfd\xd3\x8b\xcd\xa9\xdd" +
+	"g\x80\xad.6\xfc\xc0\x95\xbc\x01\x897\xb0\xd6\xd9w" +
+	"\xb5{.]\x04\xb6Br\xbf\xbf>\x7f\xe1\xc1\xb5\xa7" +
+	"#\x00\xa86\xd3[5F\x0a\x80\x1a\xa1N\xf5 \x7f" +
+	"\xb93o\xc2\xbdg\x0b/\xc7<:\x99\x83\xed\xa2n" +
+	"\x04\xd9\xfdu\xf5\\\xdd\xe0\xcd\xf7\xe3\xc0\xd6\xfa\x95\x08" +
+	"\xd9\xbc\xf2hn\xe2\xc0\xc7\xd1\xc9\xdb^\xc5SPO" +
+	"\x83((\xb8\x02k\xdd\xdeSw\xbe6\xde\xf3$\x8a" +
+	"\xaf\x1d\xb4\x15A\xfe<4\xdd\xf8\xf8\xf0\xc3\xa9Je" +
+	"\x11\x9aS\xb7\x0be\xad\xd4\xa9\x1e\x12\xca>\xdcxv" +
+	"\xa2ah\xe4\xf9b\x9f\x1d\xd4\xc2Y\xf6\x0b\x96\xfbw" +
+	"\xbf\xccO\x87\xa4o\x7f\xf8\xcc\xd0-u@\xa0\x1d\xa5" +
+	"Qu\x82\xbf~\xf6t\xbd\xda \xcf\xce\x97\x04]\xa1" +
+	"\x06\xee\xc5I\xf5\x9b\x19\xc3\x89\xca)#\x9f\xcd\xef\xd0" +
+	"\xec\\\xe6\x88c\xb6\x1b\x96\xd5k\xa4\xd2\xd1\xbe\\\xd6" +
+	"l\xd2\x0c\xdb\xc8\xa0\xa3\xcb\x92\x0c #\x00\x0b\xb6\x00" +
+	"\xe85\x12\xea\xab\x08C}F\xc1\xc0 \x10\x06\x01\x8b" +
+	"xR\x19^\xb4\xd0of\xff\x86\xb3\x0f@_.\xa1" +
+	"\xbe\x86\xd0M-\x90\x02\x002?)@d\x8b`\xa9" +
+	"\x0c6a\xe7\x94\xb4ik\x88\xba,\x05\x00\x8a3C" +
+	"\x7fD\x8cu\x03\xb1Z\xc5\xcd\x9a\xc7\xc5'\x90\x1c3" +
+	"\x8e\x1a\xe2\x92\x9c'Mg\xc0\x92\x0aN\x95\xe6\x84\x9d" +
+	"K\x9bv\xd4\xc7v\xcc&-\xcc=.\xbd?\xd9\xc6" +
+	"\x19\x0ae\x99$J\xd9\x0e\xe7\xbd>d\xa5iW$" +
+	"R\x11\xb4m:9\xeb\x18W\x1e\x16\xc0U\x92k7" +
+	"\xac\xb0\xf0Y\xca\xce?<\xf4O\x82\xb1\x16 \x16P" +
+	"B<\x8a\xf2\xcc\xaa\x90jF\x88\xbb\xff\xafEA\x1f" +
+	"*,\xb0\xb8\x9e\x1a\xa1\xc7\xbfs\xec\xe9\x02owc" +
+	"\\O\xb3\x82X\xbc\x0d\xf4/\x8d\xd5'\x80XP\x09" +
+	"\xf1E\x8b\xe3\xf0\x82\xa2\x7f\xaa\x16;\xe9O\xf8w\x00" +
+	"\x00\x00\xff\xff\xe2\xaba\xe4"
 
 func init() {
 	schemas.Register(schema_85d3acc39d94e0f8,
-		0x83fb5ff693cfa51e,
-		0x8d06c7cb3882d565,
-		0xa56d1a4022c38af3,
-		0xb620e8a9405a73e7,
-		0xbbd5ccf904da8d77,
-		0xcc33bc870fc6d6e0,
-		0xe17a62d19f60961b,
-		0xe777f75a1992adaa)
+		0x843d0a7e2ea8a6ae,
+		0x8844632fdcedadc9,
+		0xa1a44809e3de3511,
+		0xa6dd748c621fe1d9,
+		0xaee4b07a0a90abfe,
+		0xb3c987e955c1f2c5,
+		0xbb1bf5b581491d6c,
+		0xcdc45f00c61bd87c,
+		0xdb857c1a79d7afe8,
+		0xf6030fd8f7f3b8be,
+		0xf7de0422df00545c)
 }
